@@ -1,12 +1,18 @@
+//Rock, Paper, Scissors, Lizard, Spock Web App created by Jack Cote and Lulu Gebbie
 // The variables store the current player's and computer's choices
 // 0 = Rock, 1 = Paper, 2 = Scissors, 3 = Lizard, 4 = Spock
+var playerWins = 0;
+var computerWins = 0;
+var currentMatch = 1;
 var playerChoice;
 var computerChoice;
+var whoWonMatch;
 
 // Variable to store the score
 // score[0] = wins, score[1] = ties, score[2] = losses
 var score = [0,0,0];
-
+var curMatchScore = [0,0,0];
+var matchHistory = [0,0,0];
 function storePlayerChoice(choice) {
     playerChoice = choice;
     console.log("My choice = " + playerChoice);
@@ -45,6 +51,21 @@ function playGame(){
     }
 }
 
+function trackMatch(resultId){
+    if (playerWins + computerWins > 2) {
+      playerWins = 0;
+      computerWins = 0;
+      currentMatch ++;
+      curMatchScore = [0,0,0];
+    }
+    if (resultId == 1) {
+        playerWins++;
+    }else if (resultId == -1) {
+        computerWins++;
+    }
+
+}
+
 function displayGameResult(resultId){
     storeComputerChoice();
     // Define an array of text labels for the choices 0, 1, 2;
@@ -54,6 +75,7 @@ function displayGameResult(resultId){
     // Create a message for the player
     var message = "Your choice was " + choices[playerChoice] + " and the computer's choice was " + choices[computerChoice] + "<br/>";
     // Add to the base message if it was a win, loss, or tie
+    trackMatch(result);
     if (result == 1) {
         // Update the score with a win
         updateScore(0);
