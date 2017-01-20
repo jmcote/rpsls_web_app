@@ -1,3 +1,4 @@
+//Rock, Paper, Scissors, Lizard, Spock Web App created by Jack Cote and Lulu Gebbie
 // The variables store the current player's and computer's choices
 // 0 = Rock, 1 = Paper, 2 = Scissors, 3 = Lizard, 4 = Spock
 var playerChoice;
