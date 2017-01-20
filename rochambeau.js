@@ -3,7 +3,7 @@
 var score = [0,0,0];
 
 // The variables store the current player's and computer's choices
-// 0 = Rock, 1 = Paper, 2 = Scissors, 3 = Spock, 4 = Lizard
+// 0 = Rock, 1 = Paper, 2 = Scissors, 3 = Lizard, 4 = Spock
 var playerChoice;
 var computerChoice;
 
@@ -26,7 +26,7 @@ function playGame(){
         // Scissors beats paper - a win!
         console.log("win");
         return 1;
-    } else if (playerChoice == 0 && computerChoice == 5)
+    } else if (playerChoice == 0 && computerChoice == 3)
         {
             //Rock beats Lizard - a win!
             console.log("win");
@@ -36,7 +36,31 @@ function playGame(){
             // Paper beat Spock - a win!
             console.log("win");
             return 1;
-    } else if (playerChoice == 2 && computerChoice == )
+    } else if (playerChoice == 2 && computerChoice == 3)
+        {
+            //Scissors beat Lizard - a win!
+            console.log("win");
+            return 1;
+    } else if (playerChoice == 3 && computerChoice == 1)
+        {
+            //Lizard beats Paper - a win!
+            console.log("win");
+            return 1;
+    } else if (playerChoice == 3 && computerChoice == 4)
+        {
+            //Lizard beats Spock - a win!
+            console.log("win");
+            return 1;
+    } else if (playerChoice == 4 && computerChoice == 0)
+        {
+            //Spock beats Rock - a win!
+            console.log("win");
+            return 1;
+    } else if (playerChoice == 4 && computerChoice == 2)
+        {
+            //Spock beats Scissors - a win!
+            console.log("win");
+            return 1;
     } else {
         // All other combinations are losses
         console.log("lose");
@@ -58,7 +82,7 @@ function updateScore(val){
 
 function displayGameResult(resultId){
     // Define an array of text labels for the choices 0, 1, 2;
-    var choices = ["Rock", "Paper", "Scissors"];
+    var choices = ["Rock", "Paper", "Scissors", "Lizard", "Spock"];
     // Now play the game and store the result
     var result = playGame();
     // Create a message for the player
