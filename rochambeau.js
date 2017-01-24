@@ -50,7 +50,7 @@ function playGame(){
     }
 }
 
-function trackMatch(resultId){
+function trackMatch(resultId, matchNotId){
     if (justWon) {
         curMatchScore[0] = 0;
         curMatchScore[2] = 0;
@@ -58,7 +58,7 @@ function trackMatch(resultId){
         curMatchScore = [0,0,0];
         justWon = false;
     }
-    if (curMatchScore[0] + curMatchScore[1] <= 2){
+    if (curMatchScore[0] < 2 || curMatchScore[1] < 2){
         if (resultId == 1) {
             curMatchScore[0]++;
         }else if (resultId == -1) {
@@ -67,11 +67,15 @@ function trackMatch(resultId){
             curMatchScore[2]++;
         }
     }
-    if (curMatchScore[0] + curMatchScore[1] > 2) {
+    if (curMatchScore[0] >= 2 || curMatchScore[1] >=2) {
         if (curMatchScore[0] > curMatchScore[1]) {
             matchHistory[1]++;
+            document.getElementById(matchNotId).innerHTML = "YOU WON THE MATCH!";
+            document.getElementById(matchNotId).className = "alert alert-success";
         }else if (curMatchScore[0] < curMatchScore[1]) {
             matchHistory[2]++;
+            document.getElementById(matchNotId).innerHTML = "YOU LOST THE MATCH!";
+            document.getElementById(matchNotId).className = "alert alert-danger";
         }
         justWon = true;
         matchHistory[0]++;
@@ -79,7 +83,9 @@ function trackMatch(resultId){
 
 }
 
-function displayGameResult(resultId){
+//matchResult
+
+function displayGameResult(resultId, matchNotId){
     storeComputerChoice();
     // Define an array of text labels for the choices 0, 1, 2;
     var choices = ["Rock", "Paper", "Scissors", "Lizard", "Spock"];
@@ -88,7 +94,7 @@ function displayGameResult(resultId){
     // Create a message for the player
     var message = "Your choice was " + choices[playerChoice] + " and the computer's choice was " + choices[computerChoice] + "<br/>";
     // Add to the base message if it was a win, loss, or tie
-    trackMatch(result);
+    trackMatch(result, matchNotId);
     if (result == 1) {
         // Update the score with a win
         updateScore(0);
@@ -117,15 +123,15 @@ function updateScore(val){
 
 function displayCurrentScoreBoard(winsId, lossesId, tiesId){
     document.getElementById(winsId).innerHTML = curMatchScore[0];
-    document.getElementById(lossesId).innerHTML = curMatchScore[2];
-    document.getElementById(tiesId).innerHTML = curMatchScore[1];
+    document.getElementById(lossesId).innerHTML = curMatchScore[1];
+    document.getElementById(tiesId).innerHTML = curMatchScore[2];
 
 }
 
-function displayMatchScoreBoard(winsId, lossesId, tiesId){
-    document.getElementById(winsId).innerHTML = matchHistory[0];
-    document.getElementById(lossesId).innerHTML = matchHistory[2];
-    document.getElementById(tiesId).innerHTML = matchHistory[1];
+function displayMatchScoreBoard(curMatchId, matchWinsId, matchLossesId){
+    document.getElementById(curMatchId).innerHTML = matchHistory[0];
+    document.getElementById(matchWinsId).innerHTML = matchHistory[1];
+    document.getElementById(matchLossesId).innerHTML = matchHistory[2];
 }
 
 function displayMasterScoreBoard(winsId, lossesId, tiesId){

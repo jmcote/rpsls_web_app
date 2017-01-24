@@ -24,8 +24,9 @@
                 <button type="button" class="btn btn-default" onclick="storePlayerChoice(4)">Spock</button>
             </p>
             <p>
-                <button type="button" class="btn btn-default" onclick="displayGameResult('result'), displayCurrenScoreBoard('currentWins', 'currentLosses', 'currentTies'), displayMatchScoreBoard('matchCurrent', 'matchWins', 'matchLosses'), displayMasterScoreBoard('wins', 'losses', 'ties')">Play</button>
+                <button type="button" class="btn btn-default" onclick="displayGameResult('result', 'matchResult'), displayCurrentScoreBoard('currentWins', 'currentLosses', 'currentTies'), displayMatchScoreBoard('matchCurrent', 'matchWins', 'matchLosses'), displayMasterScoreBoard('wins', 'losses', 'ties')">Play</button>
             </p>
+            <p id="matchResult"></p>
             <p id="result"></p>
         </div>
         <div id="scoreboard">
