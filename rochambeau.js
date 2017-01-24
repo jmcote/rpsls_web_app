@@ -1,18 +1,17 @@
 //Rock, Paper, Scissors, Lizard, Spock Web App created by Jack Cote and Lulu Gebbie
 // The variables store the current player's and computer's choices
 // 0 = Rock, 1 = Paper, 2 = Scissors, 3 = Lizard, 4 = Spock
-var playerWins = 0;
-var computerWins = 0;
-var currentMatch = 1;
 var playerChoice;
 var computerChoice;
 var whoWonMatch;
-var currentTies;
 // Variable to store the score
 // score[0] = wins, score[1] = ties, score[2] = losses
 var curMatchScore = [0,0,0];
-var matchHistory = [0,0,0];
+var matchHistory = [1,0,0];
 var score = [0,0,0];
+
+var justWon = false;
+
 function storePlayerChoice(choice) {
     playerChoice = choice;
     console.log("My choice = " + playerChoice);
@@ -52,19 +51,30 @@ function playGame(){
 }
 
 function trackMatch(resultId){
-    if (curMatchScore[0] + curMatchScore[1] > 2) {
-      curMatchScore[0] = 0;
-      curMatchScore[2] = 0;
-      curMatchScore[1] = 0;
-      currentMatch ++;
-      curMatchScore = [0,0,0];
+    if (justWon) {
+        curMatchScore[0] = 0;
+        curMatchScore[2] = 0;
+        curMatchScore[1] = 0;
+        curMatchScore = [0,0,0];
+        justWon = false;
     }
-    if (resultId == 1) {
-        curMatchScore[0]++;
-    }else if (resultId == -1) {
-        curMatchScore[1]++;
-    }else {
-        curMatchScore[2]++;
+    if (curMatchScore[0] + curMatchScore[1] <= 2){
+        if (resultId == 1) {
+            curMatchScore[0]++;
+        }else if (resultId == -1) {
+            curMatchScore[1]++;
+        }else {
+            curMatchScore[2]++;
+        }
+    }
+    if (curMatchScore[0] + curMatchScore[1] > 2) {
+        if (curMatchScore[0] > curMatchScore[1]) {
+            matchHistory[1]++;
+        }else if (curMatchScore[0] < curMatchScore[1]) {
+            matchHistory[2]++;
+        }
+        justWon = true;
+        matchHistory[0]++;
     }
 
 }
