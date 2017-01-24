@@ -7,12 +7,12 @@ var currentMatch = 1;
 var playerChoice;
 var computerChoice;
 var whoWonMatch;
-
+var currentTies;
 // Variable to store the score
 // score[0] = wins, score[1] = ties, score[2] = losses
-var score = [0,0,0];
 var curMatchScore = [0,0,0];
 var matchHistory = [0,0,0];
+var score = [0,0,0];
 function storePlayerChoice(choice) {
     playerChoice = choice;
     console.log("My choice = " + playerChoice);
@@ -52,16 +52,19 @@ function playGame(){
 }
 
 function trackMatch(resultId){
-    if (playerWins + computerWins > 2) {
-      playerWins = 0;
-      computerWins = 0;
+    if (curMatchScore[0] + curMatchScore[1] > 2) {
+      curMatchScore[0] = 0;
+      curMatchScore[2] = 0;
+      curMatchScore[1] = 0;
       currentMatch ++;
       curMatchScore = [0,0,0];
     }
     if (resultId == 1) {
-        playerWins++;
+        curMatchScore[0]++;
     }else if (resultId == -1) {
-        computerWins++;
+        curMatchScore[1]++;
+    }else {
+        curMatchScore[2]++;
     }
 
 }
@@ -102,7 +105,20 @@ function updateScore(val){
     console.log("The score is now " + score);
 }
 
-function displayScoreBoard(winsId, lossesId, tiesId){
+function displayCurrentScoreBoard(winsId, lossesId, tiesId){
+    document.getElementById(winsId).innerHTML = curMatchScore[0];
+    document.getElementById(lossesId).innerHTML = curMatchScore[2];
+    document.getElementById(tiesId).innerHTML = curMatchScore[1];
+
+}
+
+function displayMatchScoreBoard(winsId, lossesId, tiesId){
+    document.getElementById(winsId).innerHTML = matchHistory[0];
+    document.getElementById(lossesId).innerHTML = matchHistory[2];
+    document.getElementById(tiesId).innerHTML = matchHistory[1];
+}
+
+function displayMasterScoreBoard(winsId, lossesId, tiesId){
     document.getElementById(winsId).innerHTML = score[0];
     document.getElementById(lossesId).innerHTML = score[2];
     document.getElementById(tiesId).innerHTML = score[1];
